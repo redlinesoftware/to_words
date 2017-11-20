@@ -9,7 +9,7 @@ module ToWords
   include ToWords::Divisions
   include ToWords::Utils
 
-  def to_words
+  def to_words(separator: ', ')
     num = numerical?(self)
     num, sign = check_sign(num)
     return (sign + UNDER_HUNDRED[num]) if num <= 100
@@ -21,7 +21,7 @@ module ToWords
       result << temp_result + " " + DIVISIONS[counter] + " " if temp_result
       counter += 1
     end
-    sign + result.reverse.join(", ").rstrip
+    sign + result.reverse.join(separator).rstrip
   end
 end
 
